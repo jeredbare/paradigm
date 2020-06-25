@@ -6,3 +6,5 @@ The purpose of this tool is to give managers and senior level management the pro
 # Tenable API Integration
 # Writing the Parser
 # Storing the Data
+# Front-End development (probably react or node)
+
