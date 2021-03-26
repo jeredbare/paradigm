@@ -12,6 +12,7 @@ Back-end makes a call to Vendor API product > grabs the vulnerability data and s
 * Dependency Checker
 * GitLab
 * Cloud Conformity
+* OWASP Amass (DNS Scoring)
 
 # Writing the Parser
 This will be different for each product.  The important thing is to make sure we're parsing the data from each product via JSON.  
@@ -22,7 +23,7 @@ This will be different for each product.  The important thing is to make sure we
 
 # Front-End development (probably react or node)
 * Must-fix dashboard
-* Risk Score Dashboard (out of 1000)
+* Risk Score Dashboard (out of 1000) -- For Vuln Management Products
 * Products 
 * Must-Fix Dashboards via each product integrated 
 
@@ -35,6 +36,10 @@ meets the following criteria:
 * level of effort low
 * exploit-code: yes
 * _fill in others criteria if needed_
+
+### DNS Scoring
+* Based of percentage of environment.  80 - 90% is bad, 50 - 70% Not great, 30 - 50% Bleh, 10 - 20% Better, 0 - 10% Really good
+* Formula = count / count + http_status code
 
 
 
