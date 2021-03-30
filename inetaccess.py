@@ -1,50 +1,41 @@
 import requests
 import json
-from requests.exceptions import Timeout
 
-# convert to list
-targets = []
-fqdn = []
-domain = []
-ip = []
-cidr = []
-loc = []
-http_status_code = []
-https_status_code = []
-okResponses = 0
 
-for line in open('D:/E Drive Downloads/gh.json', 'r'):
-    targets.append(json.loads(line))
+def scan_site(file_to_scan):
+    targets = []
+    ok_responses = 0
+    json_response = []
 
-for i in targets:
-    fqdn.append(i['name'])
-    domain.append(i['domain'])
-    ip.append((i['addresses'])[0]['ip'])
+    for line in open(file_to_scan, 'r'):
+        targets.append(json.loads(line))
 
-    for a in i['addresses']:
-        ip.append(a['ip'])
-        cidr.append(a['cidr'])
-        loc.append(a['desc'])
+    for target in targets:
+        try:
+            response_dict = {'fqdn': '', 'domain': '', 'ip': [], 'cidr': '', 'loc': [], 'http': '', 'https': ''}
+            http = requests.get("http://{}".format(target['name']), timeout=2)
+            https = requests.get("https://{}".format(target['name']), timeout=2)
+            print("\nHTTP Response: " + str(http.status_code))
+            print("HTTPS Response: " + str(https.status_code))
+            response_dict['fqdn'] = target['name']
+            response_dict['domain'] = target['domain']
+            response_dict['ip'] = target['addresses'][0]['ip']
+            response_dict['cidr'] = target['addresses'][0]['cidr']
+            response_dict['loc'] = target['addresses'][0]['desc']
+            response_dict['http'] = str(http.status_code)
+            response_dict['https'] = str(https.status_code)
+            json_response.append(response_dict)
+            ok_responses = ok_responses + 1
+        except requests.exceptions.ConnectionError as e:
+            print("No Response from " + str(target['name']) + "!")
+            http = "No HTTP Response"
+            https = "No HTTPS Response"
+            continue
 
-for i in fqdn:
-    try:
-        http = requests.get("http://{}".format(i), timeout=2)
-        https = requests.get("https://{}".format(i), timeout=2)
-        print(i)
-        print("HTTP Response: " + str(http.status_code))
-        print("HTTPS Response: " + str(https.status_code) + "\n")
-        http_status_code.append(http)
-        https_status_code.append(https)
-        okResponses = okResponses + 1
-    except requests.exceptions.ConnectionError as e:
-        http = "No HTTP Response"
-        https = "No HTTPS Response"
-        continue
-responseDict = {'fqdn': fqdn, 'domain': domain, 'ip': ip, 'cidr': cidr, 'location': loc, 'http': http_status_code,
-                'https': https_status_code}
-
-resultScore = (okResponses / len(targets)) * 100
-
-print("There were a total of " + str(len(targets)) + " potential domains.")
-print("We received a total of " + str(okResponses) + " 200 responses.")
-print("The result for this site is: " + f'{resultScore:.2f}')
+    result_score = (ok_responses / len(targets)) * 100
+    json_response.append({"result_score":  str(result_score)})
+    json_dump = json.dumps(json_response)
+    print("There were a total of " + str(len(targets)) + " potential domains.")
+    print("We received a total of " + str(ok_responses) + " http/https 200 responses.")
+    print("The result for this site is: " + f'{result_score:.2f}')
+    return json_dump
