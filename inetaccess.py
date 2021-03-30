@@ -44,4 +44,6 @@ responseDict = {'fqdn': fqdn, 'domain': domain, 'ip': ip, 'cidr': cidr, 'locatio
                 'https': https_status_code}
 
 resultScore = (okResponses / len(targets)) * 100
+print("There were a total of " + len(targets) + " potential domains.")
+print("We received a total of " + okResponses + " 200 responses.")
 print("The result for this site is: " + f'{resultScore:.2f}')
