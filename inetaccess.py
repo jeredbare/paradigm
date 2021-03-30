@@ -11,6 +11,7 @@ cidr = []
 loc = []
 http_status_code = []
 https_status_code = []
+okResponses = 0
 
 for line in open('D:/E Drive Downloads/gh.json', 'r'):
     targets.append(json.loads(line))
@@ -34,9 +35,13 @@ for i in fqdn:
         print("HTTPS Response: " + str(https.status_code) + "\n")
         http_status_code.append(http)
         https_status_code.append(https)
+        okResponses = okResponses + 1
     except requests.exceptions.ConnectionError as e:
         http = "No HTTP Response"
         https = "No HTTPS Response"
         continue
 responseDict = {'fqdn': fqdn, 'domain': domain, 'ip': ip, 'cidr': cidr, 'location': loc, 'http': http_status_code,
                 'https': https_status_code}
+
+resultScore = (okResponses / len(targets)) * 100
+print("The result for this site is: " + f'{resultScore:.2f}')
