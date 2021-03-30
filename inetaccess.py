@@ -2,32 +2,28 @@ import requests
 import json
 from requests.exceptions import Timeout
 
-#convert to list 
+# convert to list
 targets = []
 fqdn = []
 domain = []
 ip = []
 cidr = []
 loc = []
-http_status_code=[]
+http_status_code = []
 https_status_code = []
 
-
-
-for line in open('[amass_json_file]', 'r'):
+for line in open('D:/E Drive Downloads/gh.json', 'r'):
     targets.append(json.loads(line))
 
 for i in targets:
     fqdn.append(i['name'])
-    domain.append(i['name'])
-    ip.append(i['domain'])
+    domain.append(i['domain'])
+    ip.append((i['addresses'])[0]['ip'])
 
     for a in i['addresses']:
         ip.append(a['ip'])
         cidr.append(a['cidr'])
         loc.append(a['desc'])
-
-
 
 for i in fqdn:
     try:
@@ -38,8 +34,9 @@ for i in fqdn:
         print("HTTPS Response: " + str(https.status_code) + "\n")
         http_status_code.append(http)
         https_status_code.append(https)
-    except requests.exceptions.ConnectionError as e: 
+    except requests.exceptions.ConnectionError as e:
         http = "No HTTP Response"
         https = "No HTTPS Response"
         continue
-dict = {'fqdn': fqdn, 'domain': domain, 'ip': ip, 'cidr': cidr, 'location': loc, 'http': http_status_code, 'https': https_status_code}
+responseDict = {'fqdn': fqdn, 'domain': domain, 'ip': ip, 'cidr': cidr, 'location': loc, 'http': http_status_code,
+                'https': https_status_code}
