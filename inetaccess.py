@@ -1,45 +1,41 @@
 import requests
 import json
-from requests.exceptions import Timeout
-
-#convert to list 
-targets = []
-fqdn = []
-domain = []
-ip = []
-cidr = []
-loc = []
-http_status_code=[]
-https_status_code = []
 
 
-
-for line in open('[amass_json_file]', 'r'):
-    targets.append(json.loads(line))
-
-for i in targets:
-    fqdn.append(i['name'])
-    domain.append(i['name'])
-    ip.append(i['domain'])
-
-    for a in i['addresses']:
-        ip.append(a['ip'])
-        cidr.append(a['cidr'])
-        loc.append(a['desc'])
+def build_response_dict(build_dict, target, http, https):
+    build_dict['fqdn'] = target['name']
+    build_dict['domain'] = target['domain']
+    build_dict['ip'] = target['addresses'][0]['ip']
+    build_dict['cidr'] = target['addresses'][0]['cidr']
+    build_dict['loc'] = target['addresses'][0]['desc']
+    build_dict['http'] = http
+    build_dict['https'] = https
+    return build_dict
 
 
+def scan_site(file_to_scan):
+    targets = []
+    ok_responses = 0
+    json_response = {}
+    scan_data = []
 
-for i in fqdn:
-    try:
-        http = requests.get("http://{}".format(i), timeout=2)
-        https = requests.get("https://{}".format(i), timeout=2)
-        print(i)
-        print("HTTP Response: " + str(http.status_code))
-        print("HTTPS Response: " + str(https.status_code) + "\n")
-        http_status_code.append(http)
-        https_status_code.append(https)
-    except requests.exceptions.ConnectionError as e: 
-        http = "No HTTP Response"
-        https = "No HTTPS Response"
-        continue
-dict = {'fqdn': fqdn, 'domain': domain, 'ip': ip, 'cidr': cidr, 'location': loc, 'http': http_status_code, 'https': https_status_code}
+    for line in open(file_to_scan, 'r'):
+        targets.append(json.loads(line))
+
+    for target in targets:
+        response_dict = {'fqdn': '', 'domain': '', 'ip': [], 'cidr': '', 'loc': [], 'http': '', 'https': ''}
+        try:
+            http = requests.get("http://{}".format(target['name']), timeout=2)
+            https = requests.get("https://{}".format(target['name']), timeout=2)
+            scan_data.append(build_response_dict(response_dict, target, str(http.status_code), str(https.status_code)))
+            if http.status_code != 200 or https.status_code != 200:
+                continue
+            ok_responses = ok_responses + 1
+        except requests.exceptions.ConnectionError as e:
+            scan_data.append(build_response_dict(response_dict, target, "No Response", "No Response"))
+            continue
+
+    result_score = (ok_responses / len(targets)) * 100
+    json_response["result_score"] = str(result_score)
+    json_response["scan_data"] = scan_data
+    return json_response
