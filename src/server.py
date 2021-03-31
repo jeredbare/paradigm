@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_restful import Api, Resource
-from inetaccess import scan_site
+from src.inetaccess import scan_site
 
 app = Flask(__name__)
 api = Api(app)
