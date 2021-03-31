@@ -34,8 +34,7 @@ def scan_site(file_to_scan):
 
     result_score = (ok_responses / len(targets)) * 100
     json_response.append({"result_score":  str(result_score)})
-    json_dump = json.dumps(json_response)
     print("There were a total of " + str(len(targets)) + " potential domains.")
     print("We received a total of " + str(ok_responses) + " http/https 200 responses.")
     print("The result for this site is: " + f'{result_score:.2f}')
-    return json_dump
+    return json_response
