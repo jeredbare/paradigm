@@ -19,8 +19,9 @@ def scan_site(file_to_scan):
     json_response = {}
     scan_data = []
 
-    for line in open(file_to_scan, 'r'):
-        targets.append(json.loads(line))
+    with open(file_to_scan) as file:
+        for line in file:
+            targets.append(json.loads(line))
 
     for target in targets:
         response_dict = {'fqdn': '', 'domain': '', 'ip': [], 'cidr': '', 'loc': [], 'http': '', 'https': ''}
