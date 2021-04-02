@@ -28,7 +28,7 @@ export default function Home() {
   const classes = useStyles(darkTheme);
 
   const getScanData = async() => {
-    const response = await fetch("/api/corsPost?url=http://localhost:5000/scan-site",
+    const response = await fetch("/api/corsPost?url=http://paradigm:5000/scan-site",
     {
       method: 'POST',
       headers: {
