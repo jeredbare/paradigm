@@ -8,9 +8,8 @@ api = Api(app)
 
 results = {}
 
-
 @app.route('/scan-site', methods=['POST'])
 def get_scan_results():
     content = request.get_json(silent=True)
-    scan_results = scan_site(content["file_to_scan"])
+    scan_results = scan_site(content['result'])
     return scan_results

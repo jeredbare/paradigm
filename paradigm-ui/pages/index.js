@@ -1,14 +1,14 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import Card from '@material-ui/core/Card';
-
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField'
 import Box from '@material-ui/core/Box'
 import { makeStyles } from "@material-ui/core/styles";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import  FileUpload  from '../components/fileUpload'
+import AmassDataTable from '../components/amassDataTable'
+import ScanScore from '../components/scanScore'
+import React, { useState } from 'react'
 
 
 import { lightBlue } from "@material-ui/core/colors";
@@ -26,8 +26,10 @@ const useStyles = makeStyles(theme => ({
 
 export default function Home() {
   const classes = useStyles(darkTheme);
+  const [fileContent, setFileContent] = useState(null)
+  const [scanScore, setScanScore] = useState(null)
 
-  const getScanData = async() => {
+  const getScanScore = async() => {
     const response = await fetch("/api/corsPost?url=http://paradigm:5000/scan-site",
     {
       method: 'POST',
@@ -35,12 +37,10 @@ export default function Home() {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        file_to_scan: 'carfax_net.json'
-      })
+      body: JSON.stringify(fileContent)
     })
     const result = await response.json()
-    console.log(result)
+    setScanScore(result.result_score)
   }
   
   return (
@@ -55,26 +55,32 @@ export default function Home() {
           Paradigm
         </h1>
 
-        <p></p>
-        <ThemeProvider theme={darkTheme}>
-          <Box width="50%" display="flex" flexDirection="row" style={{ justifyContent: "space-evenly" }}>
-            <TextField id="outlined-basic" label="Domain" variant="outlined" />
-            <Button variant="contained"onClick={()=> {getScanData()}}>Analyze</Button>
-          </Box>
-        </ThemeProvider>
 
+        <p></p>
+        {fileContent ?
+          <Box width="100%" display="flex" flexDirection="column" style={{ justifyContent: "space-evenly" }}>
+            <Box width="100%" display="flex" flexDirection="row" style={{ justifyContent: "space-evenly" }}>
+              <FileUpload fileUpdate={setFileContent}/>
+              <Box height="50%" display="flex" flexDirection="column" style={{ justifyContent: "space-between" }}>
+                <Button variant="contained"onClick={()=> {getScanScore()}}>Get Score</Button>
+                <p></p>
+                <Button variant="contained"onClick={()=> {setFileContent(null)}}>Clear Data</Button>
+              </Box>
+              {scanScore ? <ScanScore scanScore={scanScore}/> : null }
+            </Box>
+            
+            <p>
+            </p>
+          <AmassDataTable fileContent={fileContent}/>
+          </Box>
+           : <FileUpload fileUpdate={setFileContent}/>}
+        
+ 
         <div className={styles.grid}>
-          <Card>
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  Result Score
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Score from scan will go here
-                </Typography>
-              </CardContent>
-          </Card>
+
+          
         </div>
+
       </main>
 
       <footer className={styles.footer}>
