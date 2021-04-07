@@ -5,23 +5,18 @@ import json
 def build_response_dict(build_dict, target, http, https):
     build_dict['fqdn'] = target['name']
     build_dict['domain'] = target['domain']
-    build_dict['ip'] = target['addresses'][0]['ip']
-    build_dict['cidr'] = target['addresses'][0]['cidr']
-    build_dict['loc'] = target['addresses'][0]['desc']
+    build_dict['ip'] = target['ip']
+    build_dict['cidr'] = target['cidr']
+    build_dict['loc'] = target['desc']
     build_dict['http'] = http
     build_dict['https'] = https
     return build_dict
 
 
-def scan_site(file_to_scan):
-    targets = []
+def scan_site(targets):
     ok_responses = 0
     json_response = {}
     scan_data = []
-
-    with open(file_to_scan) as file:
-        for line in file:
-            targets.append(json.loads(line))
 
     for target in targets:
         response_dict = {'fqdn': '', 'domain': '', 'ip': [], 'cidr': '', 'loc': [], 'http': '', 'https': ''}

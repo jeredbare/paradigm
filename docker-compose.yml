@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  paradigm-ui:
+    image: services/paradigm-ui
+    ports:
+        - 3000:3000
+    build: # "context" and "dockerfile" fields have to be under "build"
+      context: .
+      dockerfile: paradigm-ui/Dockerfile
+    networks:
+        - paradigm_net
+
+  paradigm:
+    image: services/paradigm
+    ports:
+        - 5000:5000
+    build: # "context" and "dockerfile" fields have to be under "build"
+      context: .
+      dockerfile: src/Dockerfile
+    networks:
+        - paradigm_net
+  
+networks:
+  paradigm_net:
+
