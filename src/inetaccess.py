@@ -31,7 +31,7 @@ def scan_site(targets):
             scan_data.append(build_response_dict(response_dict, target, "No Response", "No Response"))
             continue
 
-    result_score = (ok_responses / len(targets)) * 100
+    result_score = round((ok_responses / len(targets)) * 100)
     json_response["result_score"] = str(result_score)
     json_response["scan_data"] = scan_data
     return json_response
