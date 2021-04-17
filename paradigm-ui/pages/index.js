@@ -9,6 +9,7 @@ import  FileUpload  from '../components/fileUpload'
 import AmassDataTable from '../components/amassDataTable'
 import ScanScore from '../components/scanScore'
 import React, { useState } from 'react'
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 
 import { lightBlue } from "@material-ui/core/colors";
@@ -25,12 +26,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Home() {
-  const classes = useStyles(darkTheme);
   const [fileContent, setFileContent] = useState(null)
   const [scanScore, setScanScore] = useState(null)
+  const [isScanning, setIsScanning] = useState(false)
 
   const getScanScore = async() => {
-    const response = await fetch("/api/corsPost?url=http://paradigm:5000/scan-site",
+    setIsScanning(true)
+
+    const response = await fetch("/api/corsPost?url=http://localhost:5000/scan-site",
     {
       method: 'POST',
       headers: {
@@ -39,8 +42,11 @@ export default function Home() {
       },
       body: JSON.stringify(fileContent)
     })
+
     const result = await response.json()
+    setIsScanning(false)
     setScanScore(result.result_score)
+
   }
   
   return (
@@ -66,7 +72,8 @@ export default function Home() {
                 <p></p>
                 <Button variant="contained"onClick={()=> {setFileContent(null)}}>Clear Data</Button>
               </Box>
-              {scanScore ? <ScanScore scanScore={scanScore}/> : null }
+              {scanScore ? <ScanScore scanScore={scanScore}/> : null}
+              {isScanning ? <CircularProgress style={{color: '#FFFFFF'}} /> : null}
             </Box>
             
             <p>
