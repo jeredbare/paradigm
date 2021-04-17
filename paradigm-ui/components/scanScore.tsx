@@ -10,9 +10,19 @@ export default function ScanScore(props) {
             <Typography gutterBottom variant="h5" component="h2">
             Scan Score:
             </Typography>
-            <Typography variant="h5" component="p">
-            {props.scanScore}
-            </Typography>
+            {props.scanScore < 30 ? 
+              <Typography variant="h5" component="p" style={{color: "#25c90c"}}>
+              {props.scanScore} %
+              </Typography>
+            : (props.scanScore >= 30 && props.scanScore < 75) ? 
+              <Typography variant="h5" component="p" style={{color: "#dbdb30" }}>
+              {props.scanScore} %
+              </Typography>
+            : props.scanScore >= 75 ? 
+              <Typography variant="h5" component="p" style={{color: "#c4002b"}}>
+              {props.scanScore} %
+              </Typography>
+            : null }
         </CardContent>
     </Card>
   )
