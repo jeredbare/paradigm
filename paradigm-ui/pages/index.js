@@ -33,7 +33,7 @@ export default function Home() {
   const getScanScore = async() => {
     setIsScanning(true)
 
-    const response = await fetch("/api/corsPost?url=http://localhost:5000/scan-site",
+    const response = await fetch("/api/corsPost?url=http://paradigm:5000/scan-site",
     {
       method: 'POST',
       headers: {
