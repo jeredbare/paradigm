@@ -1,35 +1,22 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField'
 import Box from '@material-ui/core/Box'
-import { makeStyles } from "@material-ui/core/styles";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import  FileUpload  from '../components/fileUpload'
 import AmassDataTable from '../components/amassDataTable'
 import ScanScore from '../components/scanScore'
 import React, { useState } from 'react'
-
-
-import { lightBlue } from "@material-ui/core/colors";
-
-const darkTheme = createMuiTheme({
-  palette: {
-    type: "dark",
-    primary: lightBlue
-  }
-});
-
-const useStyles = makeStyles(theme => ({
-  root: {}
-}));
+import CircularProgress from "@material-ui/core/CircularProgress";
+import ScanResultTable from '../components/scanResultTable'
 
 export default function Home() {
-  const classes = useStyles(darkTheme);
   const [fileContent, setFileContent] = useState(null)
-  const [scanScore, setScanScore] = useState(null)
+  const [scanResults, setScanResults] = useState(null)
+  const [isScanning, setIsScanning] = useState(false)
 
   const getScanScore = async() => {
+    setIsScanning(true)
+
     const response = await fetch("/api/corsPost?url=http://paradigm:5000/scan-site",
     {
       method: 'POST',
@@ -39,8 +26,10 @@ export default function Home() {
       },
       body: JSON.stringify(fileContent)
     })
+
     const result = await response.json()
-    setScanScore(result.result_score)
+    setIsScanning(false)
+    setScanResults(result)
   }
   
   return (
@@ -55,7 +44,6 @@ export default function Home() {
           Paradigm
         </h1>
 
-
         <p></p>
         {fileContent ?
           <Box width="100%" display="flex" flexDirection="column" style={{ justifyContent: "space-evenly" }}>
@@ -66,21 +54,15 @@ export default function Home() {
                 <p></p>
                 <Button variant="contained"onClick={()=> {setFileContent(null)}}>Clear Data</Button>
               </Box>
-              {scanScore ? <ScanScore scanScore={scanScore}/> : null }
+              {scanResults ? <ScanScore scanScore={scanResults.result_score}/> : null}
+              {isScanning ? <CircularProgress style={{color: '#FFFFFF'}} /> : null}
             </Box>
-            
-            <p>
-            </p>
-          <AmassDataTable fileContent={fileContent}/>
+            <p></p>
+            {scanResults ? <ScanResultTable scanResults={scanResults}/> : null}
+            <p></p>
+            <AmassDataTable fileContent={fileContent}/>
           </Box>
            : <FileUpload fileUpdate={setFileContent}/>}
-        
- 
-        <div className={styles.grid}>
-
-          
-        </div>
-
       </main>
 
       <footer className={styles.footer}>

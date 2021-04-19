@@ -9,7 +9,7 @@ export default function AmassDataTable(props) {
         <Table 
         columns={[
             { title: 'Name', field: 'name' },
-            { title: 'Domain', field: 'domain', hidden: true },
+            { title: 'Domain', field: 'domain' },
             { title: 'IP', field: 'ip' },
             { title: 'CIDR', field: 'cidr'},
             { title: 'ASN', field: 'asn' },

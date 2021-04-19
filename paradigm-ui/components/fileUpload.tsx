@@ -24,7 +24,8 @@ export default function FileUpload(props) {
   }, [])
 
   const buildData = (jsonData) => {
-    const jsonDataParsed = JSON.parse(jsonData)
+    const formatJSONArray = '[' + (jsonData.replace(/{"name":/g,",{\"name\":")).substring(1) + ']'
+    const jsonDataParsed = JSON.parse(formatJSONArray)
     const dataRows = []
     for(const row of jsonDataParsed)
     {
