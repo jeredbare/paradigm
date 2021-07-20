@@ -28,7 +28,7 @@ This tool is geared towards to those who may not feel comfortable with the comma
 * The scoring mechanism is based on your threat landscape.  The more discovered domains that are open to the internet, the higher score you will get (this is not ideal).
 
 ### Example
-* If your `Scan Score` is 90% - that means 90% of the discovered domains responded back with 200 response and are open to the internet.  Scoring is subjective, however you may want to evaluate you environment to see if everything open to the internet is supposed to be.  
+* If your `Scan Score` is 90% - that means 90% of the discovered domains responded back with 200 response and are open to the internet.  Scoring is subjective, however you may want to evaluate you environment to see if everything open to the internet that is supposed to be.  
 
 ### To Do
 * We plan on running Amass in a docker container so can run commands from the web server.  This will be on the road map for this year.
