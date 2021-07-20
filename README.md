@@ -1,3 +1,9 @@
+# How to Run
+1. Clone this repository
+2. In the master folder run `docker-compose build`
+3. One the container is built run `docker-compose up`
+4. Navigate to http://localhost:3000
+
 # Purpose
 Paradigm provides an user interface to analyze the json output from `enum` command from Amass.  The goal of this project is to notify Security and IT teams of assets they may not know is open to the internet.  Hence, we've built in a scoring system to check the HTTP Response codes of all assets found from the `enum` command from Amass.  
 
