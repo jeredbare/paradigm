@@ -1,5 +1,11 @@
 # Paradigm
 
+## About
+
+### Purpose
+Paradigm provides an user interface to analyze the json output from `enum` command from Amass.  The goal of this project is to notify Security and IT teams of assets they may not know is open to the internet.  Hence, we've built in a scoring system to check the HTTP Response codes of all assets found from the `enum` command from Amass.  
+
+
 # How to install and run
 1. Clone this repository
 `git clone https://github.com/jeredbare/paradigm`
@@ -15,8 +21,6 @@
 2. Upload the file to Paradigm.
 3. Click on "Get Score" and Paradigm will check the status codes of each discovered domain.  
 
-# Purpose
-Paradigm provides an user interface to analyze the json output from `enum` command from Amass.  The goal of this project is to notify Security and IT teams of assets they may not know is open to the internet.  Hence, we've built in a scoring system to check the HTTP Response codes of all assets found from the `enum` command from Amass.  
 
 # Why?
 TLS everywhere is probably one of the greatest things to happen in the InfoSec and IT space.  However, with the rise of cloud technologies TLS everywhere and automation means something a bit different in the environment.  Engineers, developers, and any other IT team can spin up cloud assets within a matter of seconds.  Most public cloud assets have a registered TLD and associated TLS certificate.  I ran an enumeration from Amass on the S3 domain in Amazon and was able to enumerate over 100,000 assets.  At the time, I did not run the response tool because I did not want to get the ban hammer from AWS.
