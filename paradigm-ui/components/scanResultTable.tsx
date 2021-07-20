@@ -15,6 +15,7 @@ export default function ScanResultTable(props) {
             { title: 'HTTP Response', field: 'http' },
             { title: 'HTTPS Response', field: 'https' },
             { title: 'Description', field: 'loc' },
+            { title: 'Date and Time', field: 'timestamp' },
             ]}
         title="Scan Results" 
         data={scanResults.scan_data}/>
