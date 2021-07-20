@@ -1,6 +1,9 @@
 # Paradigm
 
 ## About
+Paradigm wanted to provide a web interface for the results that Amass outputs to json from the enumeration command and display what domains may respond to a HTTP GET request.  The 200 responses will then be calculated into a score and reported back to the user.  Amass is an Open Source DNS Recon and Enumeration tool developed by the talented [Jeff Foley](https://twitter.com/jeff_foley).  The user can then compare the results reported from the Amass json file to the previous scan, local CMDB, and asset lists.  
+
+This tool is geared towards to those who may not feel comfortable with the commandline and/or would like an interface to see the json output.  
 
 ### Purpose
 Paradigm provides an user interface to analyze the json output from `enum` command from Amass.  The goal of this project is to notify Security and IT teams of assets they may not know is open to the internet.  Hence, we've built in a scoring system to check the HTTP Response codes of all assets found from the `enum` command from Amass.  
@@ -27,17 +30,12 @@ https://twitter.com/jeredbare/status/1374087380601278471
 4. Navigate to http://localhost:3000
 
 
-# Scanning Amass Enumeration JSON Files
+### Scanning Amass Enumeration JSON Files
 1. You will need the json file from the enumeration command in Amass.  You can do this by the following command 
 `amass enum -d [domain] -json [json_file_name].json`
 2. Upload the file to Paradigm.
 `[json_file_name].json`
 3. Click on "Get Score" and Paradigm will check the status codes of each discovered domain.  
-
-
-Amass is an Open Source DNS Recon and Enumeration tool developed by the talented Jeff Caffix.  We wanted to provide a web interface for the results that Amass outputs to json from the enumeration command and display what domains may respond to a HTTP GET request.  The 200 responses will then be calculated into a score and reported back to the user.  The user can then compare the results reported from the Amass json file to the previous scan, local CMDB, asset list, etc.
-
-This tool is geared towards to those who may not feel comfortable with the commandline and/or would like an interface to see the json output.  
 
 ## Scoring System
 
@@ -60,7 +58,9 @@ This tool is geared towards to those who may not feel comfortable with the comma
 * Sometimes the Python requests module will have a connection error out depending on the domain.  It's rare, but I have not been able to pinpoint the issue.  
 
 # Thanks
-Jeff Foley [@caffix](https://github.com/caffix) [twitter](https://twitter.com/jeff_foley)
+Founder and main developer on Amass: [@jeff_foley](https://twitter.com/jeff_foley) GH:[caffix](https://github.com/caffix)
+Main developer on Paradigm: [Jordan](https://github.com/jstanford2013)
+Spot checked the product: [Lojikil](https://github.com/lojikil) Twitter: [@lojikil](https://twitter.com/lojikil)
 
 
 
