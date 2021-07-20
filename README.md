@@ -1,8 +1,14 @@
-# How to Run
+# How to install and run
 1. Clone this repository
 2. In the master folder run `docker-compose build`
 3. One the container is built run `docker-compose up`
 4. Navigate to http://localhost:3000
+5. Upload the json file to Paradigm.
+
+# Scanning Amass Enumeration JSON Files
+1. You will need the json file from the enumeration command in Amass.  You can do this by the following command `amass enum -d [domain] -json [json_file_name].json
+2. Upload the file to Paradigm.
+3. Click on "Get Score" and Paradigm will check the status codes of each discovered domain.  
 
 # Purpose
 Paradigm provides an user interface to analyze the json output from `enum` command from Amass.  The goal of this project is to notify Security and IT teams of assets they may not know is open to the internet.  Hence, we've built in a scoring system to check the HTTP Response codes of all assets found from the `enum` command from Amass.  
