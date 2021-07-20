@@ -6,7 +6,7 @@
 5. Upload the json file to Paradigm.
 
 # Scanning Amass Enumeration JSON Files
-1. You will need the json file from the enumeration command in Amass.  You can do this by the following command `amass enum -d [domain] -json [json_file_name].json
+1. You will need the json file from the enumeration command in Amass.  You can do this by the following command `amass enum -d [domain] -json [json_file_name].json`
 2. Upload the file to Paradigm.
 3. Click on "Get Score" and Paradigm will check the status codes of each discovered domain.  
 
