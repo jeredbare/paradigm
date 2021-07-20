@@ -1,9 +1,14 @@
+# Paradigm
+
 # How to install and run
 1. Clone this repository
-2. In the master folder run `docker-compose build`
-3. One the container is built run `docker-compose up`
+`git clone https://github.com/jeredbare/paradigm`
+2. In the master folder run 
+`docker-compose build`
+3. One the container is built run 
+`docker-compose up`
 4. Navigate to http://localhost:3000
-5. Upload the json file to Paradigm.
+
 
 # Scanning Amass Enumeration JSON Files
 1. You will need the json file from the enumeration command in Amass.  You can do this by the following command `amass enum -d [domain] -json [json_file_name].json`
