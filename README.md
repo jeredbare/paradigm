@@ -59,7 +59,9 @@ https://twitter.com/jeredbare/status/1374087380601278471
 
 # Thanks
 Founder and main developer on Amass: [@jeff_foley](https://twitter.com/jeff_foley) GH:[caffix](https://github.com/caffix)
+
 Main developer on Paradigm: [Jordan](https://github.com/jstanford2013)
+
 Spot checked the product: [Lojikil](https://github.com/lojikil) Twitter: [@lojikil](https://twitter.com/lojikil)
 
 
