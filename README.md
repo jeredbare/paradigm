@@ -72,6 +72,9 @@ Please feel free to fork the project and make/suggest improvements to the produc
 ### Issues
 Please use the Issues tab to report any issues. 
 
+## License 
+MIT License
+
 # Thanks
 Founder and main developer on Amass: Twitter - [@jeff_foley](https://twitter.com/jeff_foley) GitHub - [caffix](https://github.com/caffix)
 
