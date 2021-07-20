@@ -53,16 +53,31 @@ https://twitter.com/jeredbare/status/1374087380601278471
 * Improve the risk scoring feature. 
 * Better error handling.
 
+## Support
+
 ### Known Bugs
 * Will not analyze a properly formatted JSON file.  It has to be the json file from the output of the command `amass enum -d [domain] -json [jsonFileName].json`  Paradigm will format the file upon upload.
 * Sometimes the Python requests module will have a connection error out depending on the domain.  It's rare, but I have not been able to pinpoint the issue.  
 
+### To Do/Roadmap
+* We plan on running Amass in a docker container so can run commands from the web server.  This will be on the road map for this year.
+* Automation tutorials.
+* Integrate attack features for protected domain testing. 
+* Improve the risk scoring feature. 
+* Better error handling.
+
+### Contributing
+Please feel free to fork the project and make/suggest improvements to the product.  
+
+### Issues
+Please use the Issues tab to report any issues. 
+
 # Thanks
-Founder and main developer on Amass: [@jeff_foley](https://twitter.com/jeff_foley) GH:[caffix](https://github.com/caffix)
+Founder and main developer on Amass: Twitter - [@jeff_foley](https://twitter.com/jeff_foley) GitHub - [caffix](https://github.com/caffix)
 
-Main developer on Paradigm: [Jordan](https://github.com/jstanford2013)
+Main developer on Paradigm: GitHub - [Jordan](https://github.com/jstanford2013)
 
-Spot checked the product: [Lojikil](https://github.com/lojikil) Twitter: [@lojikil](https://twitter.com/lojikil)
+Spot checked the product: GitHub - [Lojikil](https://github.com/lojikil) Twitter - [@lojikil](https://twitter.com/lojikil)
 
 
 
