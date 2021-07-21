@@ -46,13 +46,6 @@ https://twitter.com/jeredbare/status/1374087380601278471
 ### Example
 * If your `Scan Score` is 90% - that means 90% of the discovered domains responded back with 200 response and are open to the internet.  Scoring is subjective, however you may want to evaluate you environment to see if everything open to the internet that is supposed to be.  
 
-### To Do
-* We plan on running Amass in a docker container so can run commands from the web server.  This will be on the road map for this year.
-* Automation tutorials.
-* Integrate attack features for protected domain testing. 
-* Improve the risk scoring feature. 
-* Better error handling.
-
 ## Support
 
 ### Known Bugs
