@@ -82,6 +82,7 @@ Main developer on Paradigm: GitHub - [Jordan](https://github.com/jstanford2013)
 
 Spot checked the project: GitHub - [Lojikil](https://github.com/lojikil) Twitter - [@lojikil](https://twitter.com/lojikil)
 
+[OWASP Foundation](https://owasp.org/)
 
 
 
